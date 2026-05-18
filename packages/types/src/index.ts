@@ -4,3 +4,17 @@ export interface Pokemon {
   types: string[];
   sprite: string;
 }
+
+export interface FavoriteRecord {
+  userId: string;
+  pokemonId: number;
+  createdAt: string;
+}
+
+export interface PaginatedResponse<T> {
+  items: T[];
+  page: number;
+  pageSize: number;
+  total: number;
+  hasNext: boolean;
+}
