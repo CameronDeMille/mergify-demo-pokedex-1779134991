@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { pokemon } from "./data/pokemon.js";
+import { listRoute } from "./routes/list.js";
 
 export const app = new Hono();
 
-app.get("/pokemon", (c) => c.json(pokemon));
+app.route("/", listRoute);
 app.get("/health", (c) => c.json({ ok: true }));
