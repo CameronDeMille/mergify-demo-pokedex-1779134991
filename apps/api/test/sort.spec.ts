@@ -3,15 +3,15 @@ import type { Pokemon } from "@pokedex/types";
 import { sortPokemon } from "../src/data/sort.js";
 
 const samples: Pokemon[] = [
-  { id: 3, name: "Venusaur", types: ["Grass"], sprite: "" },
-  { id: 1, name: "Bulbasaur", types: ["Grass"], sprite: "" },
-  { id: 2, name: "Ivysaur", types: ["Grass"], sprite: "" },
+  { id: 3, name: "Venusaur", types: ["Grass"], sprite: "", ownerId: "system" },
+  { id: 1, name: "Bulbasaur", types: ["Grass"], sprite: "", ownerId: "system" },
+  { id: 2, name: "Ivysaur", types: ["Grass"], sprite: "", ownerId: "system" },
 ];
 
 const expected: Pokemon[] = [
-  { id: 1, name: "Bulbasaur", types: ["Grass"], sprite: "" },
-  { id: 2, name: "Ivysaur", types: ["Grass"], sprite: "" },
-  { id: 3, name: "Venusaur", types: ["Grass"], sprite: "" },
+  { id: 1, name: "Bulbasaur", types: ["Grass"], sprite: "", ownerId: "system" },
+  { id: 2, name: "Ivysaur", types: ["Grass"], sprite: "", ownerId: "system" },
+  { id: 3, name: "Venusaur", types: ["Grass"], sprite: "", ownerId: "system" },
 ];
 
 describe("sortPokemon", () => {
