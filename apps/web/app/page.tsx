@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { loadPage } from "./lib/pokemon";
+import { FavoriteButton } from "./components/FavoriteButton";
 
 const PAGE_SIZE = 10;
+const DEMO_TOKEN = "demo-token-alice";
 
 export default function Page({
   searchParams,
@@ -21,7 +23,8 @@ export default function Page({
       <ul>
         {result.items.map((p) => (
           <li key={p.id}>
-            #{p.id} {p.name} — {p.types.join(", ")}
+            #{p.id} {p.name} — {p.types.join(", ")}{" "}
+            <FavoriteButton pokemonId={p.id} token={DEMO_TOKEN} />
           </li>
         ))}
       </ul>
