@@ -3,6 +3,7 @@ export interface Pokemon {
   name: string;
   types: string[];
   sprite: string;
+  ownerId: string;
 }
 
 export interface FavoriteRecord {
