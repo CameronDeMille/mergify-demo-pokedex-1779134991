@@ -1,0 +1,30 @@
+queue_rules:
+  - name: default
+    # Retry up to 2 times on flaky CI — Mergify recreates the draft PR for a
+    # fresh CI run each time. Bumped from 1 after dry-run 4: the planted
+    # `Date.now()`-seeded test in apps/api/test/sort.spec.ts fires ~30% of
+    # runs; with 2 retries (3 attempts total) the chance of exhausting the
+    # budget is ~2.7% vs ~9% at retries: 1.
+    max_checks_retries: 2
+
+    # Batch up to 5 PRs into one merge-queue draft and one Step-2 CI run.
+    # When a batch fails, Mergify *bisects* — splits the batch into smaller
+    # drafts to isolate the offending PR. That's the headline demo beat.
+    batch_size: 5
+    batch_max_wait_time: 30 s
+
+    # ── Step 1: fast checks, run on every PR push ──
+    queue_conditions:
+      - check-success=typecheck
+      - check-success=build
+
+    # ── Step 2: slow / strict checks, run only on the batched merge-queue
+    # draft branch (apps/api unit tests, web smoke test, full lint). Failures
+    # here dequeue the whole batch (or trigger bisection); fix-and-restack
+    # re-enters once Step 1 passes again.
+    merge_conditions:
+      - check-success=lint
+      - check-success=test_api
+      - check-success=test_web
+
+    merge_method: squash
