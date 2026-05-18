@@ -8,11 +8,12 @@ describe("api", () => {
     expect(await res.json()).toEqual({ ok: true });
   });
 
-  it("GET /pokemon returns a non-empty array", async () => {
+  it("GET /pokemon returns a paginated response", async () => {
     const res = await app.request("/pokemon");
     expect(res.status).toBe(200);
     const body = await res.json();
-    expect(Array.isArray(body)).toBe(true);
-    expect(body.length).toBeGreaterThan(0);
+    expect(Array.isArray(body.items)).toBe(true);
+    expect(body.items.length).toBeGreaterThan(0);
+    expect(typeof body.total).toBe("number");
   });
 });
